@@ -1,0 +1,74 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <title>Random Quote Generator</title>
+  <script>
+    const quoteList=[
+      {quote:"We cannot solve our problems with the same thinking we used when we created them.",author:"Albert Einstein"},
+      {quote:"Live as if you were to die tomorrow. Learn as if you were to live forever.",
+      author:"Mahatma Gandhi"},
+      {quote:"That which does not kill us makes us stronger.",
+      author:"Friedrich Niezsche"},
+      {quote:"Be who you are and say what you feel, because those who mind don’t matter and those who matter don’t mind.",
+      author:"Renard M. Baruch"},
+      {quote:"We must not allow other people’s limited perceptions to define us.",
+      author:"Virginia Satir"}
+    ];
+
+    window.onload = getRandomQuote;
+    
+    function getRandomQuote(){
+      const item = Math.floor(Math.random()*((quoteList.length-1)+1));
+      document.getElementById("text").innerText = quoteList[item].quote;
+      document.getElementById("author").innerText = quoteList[item].author;
+  
+      let twitterLink = "https://twitter.com/intent/tweet?text=";
+      let quoteLink = quoteList[item].quote.replace(/\s/g,"%20");
+      let authorLink = quoteList[item].author.replace(/\s/g,"%20");
+      twitterLink += quoteLink + "%0A%20-%20" + authorLink;   
+      
+      document.getElementById("tweet-quote").href = twitterLink;
+    }
+  </script>
+
+  <style>
+    body{
+      background-color: aquamarine;
+    }
+    #quote-box{
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      display: grid;
+      background-color: white;
+      padding: 30px;
+      font: Arial; 
+      font-size: 2rem;
+      margin:100px;
+    }
+    #author{
+      text-align:right;
+    }
+    #new-quote{
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    i{
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  <wrapper id="quote-box">
+    <div id="text">Quote</div>
+    <div id="author">Author</div>
+    <button class="btn btn-success" id="new-quote" onClick=getRandomQuote()><i class="bi bi-arrow-clockwise"></i>Get New Quote</button>
+    <a class ="btn btn-primary" href="#" id="tweet-quote" target="_blank"><i class="bi bi-twitter"></i>Tweet Quote</a>
+  </wrapper>
+
+</body>
+</html>
